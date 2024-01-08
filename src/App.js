@@ -15,7 +15,7 @@ export default function App() {
       setResult(data.rates[targetCurrency]);
     }
     convert();
-  }, []);
+  }, [amount, baseCurrency, targetCurrency]);
 
   return (
     <div>
