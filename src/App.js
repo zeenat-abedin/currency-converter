@@ -14,9 +14,15 @@ export default function App() {
       const res = await fetch(
         `https://api.frankfurter.app/latest?amount=${amount}&from=${baseCurrency}&to=${targetCurrency}`
       );
+
       const data = await res.json();
+
       setResult(data.rates[targetCurrency]);
       setLoading(false);
+    }
+
+    if (baseCurrency === targetCurrency) {
+      setResult(amount);
     }
     convert();
   }, [amount, baseCurrency, targetCurrency]);
@@ -31,7 +37,7 @@ export default function App() {
       />
       <select
         value={baseCurrency}
-        onChange={(e) => setBaseCurrency(Number(e.target.value))}
+        onChange={(e) => setBaseCurrency(e.target.value)}
         disabled={loading}
       >
         <option value="USD">USD</option>
@@ -41,7 +47,7 @@ export default function App() {
       </select>
       <select
         value={targetCurrency}
-        onChange={(e) => setTargetCurrency(Number(e.target.value))}
+        onChange={(e) => setTargetCurrency(e.target.value)}
         disabled={loading}
       >
         <option value="USD">USD</option>
