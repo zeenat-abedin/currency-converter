@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-// `https://api.frankfurter.app/latest?amount=100&from=EUR&to=USD`
+//
 
 export default function App() {
   const [amount, setAmount] = useState(1);
   const [baseCurrency, setBaseCurrency] = useState("EUR");
   const [targetCurrency, setTargetCurrency] = useState("USD");
 
+  useEffect(() => {
+    async function convert() {
+      const res = await fetch(
+        `https://api.frankfurter.app/latest?amount=${amount}&from=${baseCurrency}&to=${targetCurrency}`
+      );
+      const data = await res.json();
+      console.log(data);
+    }
+    convert();
+  }, []);
+
   return (
     <div>
-      <input type="text" value={(e) => setAmount(Number(e.target.value))} />
+      <input
+        type="text"
+        value={amount}
+        onChange={(e) => setAmount(Number(e.target.value))}
+      />
       <select
         value={baseCurrency}
         onChange={(e) => setBaseCurrency(Number(e.target.value))}
