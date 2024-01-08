@@ -9,14 +9,20 @@ export default function App() {
 
   return (
     <div>
-      <input type="text" value={(e) => setAmount(e.target.value)} />
-      <select>
+      <input type="text" value={(e) => setAmount(Number(e.target.value))} />
+      <select
+        value={baseCurrency}
+        onChange={(e) => setBaseCurrency(Number(e.target.value))}
+      >
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="CAD">CAD</option>
         <option value="INR">INR</option>
       </select>
-      <select>
+      <select
+        value={targetCurrency}
+        onChange={(e) => setTargetCurrency(Number(e.target.value))}
+      >
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
         <option value="CAD">CAD</option>
